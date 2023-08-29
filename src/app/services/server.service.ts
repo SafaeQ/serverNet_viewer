@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Server, Site } from '../interfaces/server.modal';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,10 @@ export class ServerService {
     Server[]
   >([]);
   servers$: Observable<Server[]> = this.serversSubject.asObservable();
+  searchForm: FormGroup | undefined;
+  filteredServers: Server[] = [];
+  filteredSites: Site[] = [];
+  searchTerm: string = '';
 
   constructor(private http: HttpClient, private dialog: MatDialog) {
     this.fetchServers();
@@ -50,7 +55,7 @@ export class ServerService {
 
   addSiteToServer(serverId: number, newSite: Site): void {
     const currentServers = this.serversSubject.value;
-    const updatedServers = currentServers.map(server => {
+    const updatedServers = currentServers.map((server) => {
       if (server.id === serverId) {
         const updatedSites = [...server.sites, newSite];
         return { ...server, sites: updatedSites };
@@ -60,4 +65,18 @@ export class ServerService {
     this.serversSubject.next(updatedServers);
     this.updateLocalStorage(updatedServers);
   }
+
+  deleteSiteFromServer(serverId: number, siteId: number): void {
+    const currentServers = this.serversSubject.value;
+    const updatedServers = currentServers.map((server) => {
+      if (server.id === serverId) {
+        const updatedSites = server.sites.filter((site) => site.id !== siteId);
+        return { ...server, sites: updatedSites };
+      }
+      return server;
+    });
+    this.serversSubject.next(updatedServers);
+    this.updateLocalStorage(updatedServers);
+  }
+
 }

@@ -4,6 +4,7 @@ import { Server, Site } from '../interfaces/server.modal';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ServerDetailsComponent } from '../server-details/server-details.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-server-list',
@@ -13,12 +14,18 @@ import { ServerDetailsComponent } from '../server-details/server-details.compone
 export class ServerListComponent implements OnInit {
   servers$: Observable<Server[]> | undefined;
 
+  searchForm!: FormGroup;
+  filteredServers: Server[] = [];
+  filteredSites: Site[] = [];
+  searchTerm: string = '';
+
   @ViewChild(ServerDetailsComponent, { static: false })
   addSiteModal: ServerDetailsComponent | undefined;
 
   constructor(
     private serverService: ServerService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder
   ) {}
 
   servers: Server[] = [];
@@ -27,6 +34,10 @@ export class ServerListComponent implements OnInit {
   ngOnInit(): void {
     this.serverService.servers$.subscribe((servers) => {
       this.servers = servers;
+    });
+
+    this.searchForm = this.formBuilder.group({
+      searchTerm: [''], // Initial value of search term
     });
   }
 
@@ -47,5 +58,31 @@ export class ServerListComponent implements OnInit {
       this.serverService.addSiteToServer(serverId, newSite);
       dialogRef.close(); // Close the modal
     });
+  }
+
+  deleteSite(serverId: number, siteId: number): void {
+    this.serverService.deleteSiteFromServer(serverId, siteId);
+  }
+
+  filterServersAndSites(): void {
+    const searchTerm = this.searchForm.value.searchTerm.toLowerCase();
+    this.filteredServers = this.servers.filter(
+      (server) =>
+        server.name.toLowerCase().includes(searchTerm) ||
+        server.ipAddress.includes(searchTerm)
+    );
+
+    this.filteredSites = this.servers.flatMap((server) =>
+      server.sites.filter(
+        (site) =>
+          site.name.toLowerCase().includes(searchTerm) ||
+          site.domainName.toLowerCase().includes(searchTerm) ||
+          site.ipAddress.includes(searchTerm)
+      )
+    );
+  }
+
+  onSearchTermChange(): void {
+    return this.filterServersAndSites();
   }
 }

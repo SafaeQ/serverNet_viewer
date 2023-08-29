@@ -24,6 +24,15 @@
     <button type="submit">Add Server</button>
   </form>
 
+  <form [formGroup]="searchForm">
+    <input
+      type="text"
+      formControlName="searchTerm"
+      placeholder="Search by IP or Domain"
+      (input)="onSearchTermChange()"
+    />
+  </form>
+
   <!-- Server List -->
   <ul>
     <li *ngFor="let server of servers">
@@ -37,10 +46,8 @@
         <li *ngFor="let site of server.sites">
           {{ site.name }} (Domain: {{ site.domainName }}) - IP:
           {{ site.ipAddress }}
-          {{ site.active}}
-          <!-- <button (click)="deleteSiteFromServer(server.id, site.id)">
-            Delete Site
-          </button> -->
+          {{ site.active }}
+          <button (click)="deleteSite(server.id, site.id)">Delete Site</button>
         </li>
       </ul>
     </li>

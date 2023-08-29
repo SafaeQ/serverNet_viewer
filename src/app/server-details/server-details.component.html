@@ -1,13 +1,14 @@
 <div class="modal">
   <h2>Add Site to Server</h2>
   <form (ngSubmit)="onAddSite()">
-    <label for="siteName">Site Name:</label>
-    <input type="text" id="siteName" [(ngModel)]="newSite.name" required />
+    <label for="newSiteName">Site Name:</label>
+    <input type="text" id="newSiteName" name="newSiteName" [(ngModel)]="newSite.name" required />
 
     <label for="domainName">Domain Name:</label>
     <input
       type="text"
       id="domainName"
+      name="domainName"
       [(ngModel)]="newSite.domainName"
       required
     />
@@ -16,6 +17,7 @@
     <input
       type="text"
       id="ipAddress"
+      name="ipAddress"
       [(ngModel)]="newSite.ipAddress"
       required
     />
