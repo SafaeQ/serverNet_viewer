@@ -14,24 +14,20 @@ export class ServerListComponent implements OnInit {
   constructor(private serverService: ServerService) {}
 
   servers: Server[] = [];
-  newServerName: string = '';
-  newServerIP: string = '';
+  newServer: Server = { id: 0, name: '', ipAddress: '', sites: [] };
 
   ngOnInit(): void {
-    this.servers$ = this.serverService.getServers();
+    this.serverService.servers$.subscribe((servers) => {
+      this.servers = servers;
+    });
   }
 
-  addServer() {
-    const newServer = {
-      id: this.servers.length + 1,
-      name: this.newServerName,
-      ipAddress: this.newServerIP,
-      sites: [],
-    };
+  addServer(): void {
+    this.serverService.addServer(this.newServer);
+    this.newServer = { id: 0, name: '', ipAddress: '', sites: [] };
+  }
 
-    this.serverService.addServer(newServer);
-
-    this.newServerName = '';
-    this.newServerIP = '';
+  deleteServer(serverId: number): void {
+    this.serverService.deleteServer(serverId);
   }
 }

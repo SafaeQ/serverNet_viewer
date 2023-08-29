@@ -8,7 +8,7 @@
       type="text"
       id="serverName"
       name="serverName"
-      [(ngModel)]="newServerName"
+      [(ngModel)]="newServer.name"
       required
     />
 
@@ -17,7 +17,7 @@
       type="text"
       id="serverIP"
       name="serverIP"
-      [(ngModel)]="newServerIP"
+      [(ngModel)]="newServer.ipAddress"
       required
     />
 
@@ -26,10 +26,10 @@
 
   <!-- Server List -->
   <ul>
-    <li *ngFor="let server of servers$ | async">
+    <li *ngFor="let server of servers">
       <h3>{{ server.name }}</h3>
       <p>IP Address: {{ server.ipAddress }}</p>
-      <button>Delete</button>
+      <button (click)="deleteServer(server.id)">Delete</button>
       <button>Add Site</button>
     </li>
   </ul>
