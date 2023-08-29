@@ -1,15 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { ServerService } from '../services/server.service';
+import { Site } from '../interfaces/server.modal';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-server-details',
   templateUrl: './server-details.component.html',
-  styleUrls: ['./server-details.component.css']
+  styleUrls: ['./server-details.component.css'],
 })
-export class ServerDetailsComponent implements OnInit {
+export class ServerDetailsComponent {
+  @Output() siteAdded: EventEmitter<Site> = new EventEmitter<Site>();
 
-  constructor() { }
+  constructor(
+    private serverService: ServerService,
+    private dialogRef: MatDialogRef<ServerDetailsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { serverId: number }
+  ) {}
 
-  ngOnInit(): void {
+  newSite: Site = {
+    id: 0,
+    name: '',
+    domainName: '',
+    ipAddress: '',
+    active: true,
+  };
+
+  onAddSite(): void {
+    const serverId = this.data.serverId;
+    console.log(serverId);
+
+    this.serverService.addSiteToServer(serverId, this.newSite); // Pass the server ID
+    this.dialogRef.close();
   }
 
+  onCancel(): void {
+    this.newSite = {
+      id: 0,
+      name: '',
+      domainName: '',
+      ipAddress: '',
+      active: true,
+    };
+    this.dialogRef.close();
+  }
 }

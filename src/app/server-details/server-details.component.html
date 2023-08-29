@@ -1,1 +1,26 @@
-<p>server-details works!</p>
+<div class="modal">
+  <h2>Add Site to Server</h2>
+  <form (ngSubmit)="onAddSite()">
+    <label for="siteName">Site Name:</label>
+    <input type="text" id="siteName" [(ngModel)]="newSite.name" required />
+
+    <label for="domainName">Domain Name:</label>
+    <input
+      type="text"
+      id="domainName"
+      [(ngModel)]="newSite.domainName"
+      required
+    />
+
+    <label for="ipAddress">IP Address:</label>
+    <input
+      type="text"
+      id="ipAddress"
+      [(ngModel)]="newSite.ipAddress"
+      required
+    />
+
+    <button type="submit">Add Site</button>
+    <button type="button" (click)="onCancel()">Cancel</button>
+  </form>
+</div>

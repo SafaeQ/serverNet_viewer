@@ -30,7 +30,19 @@
       <h3>{{ server.name }}</h3>
       <p>IP Address: {{ server.ipAddress }}</p>
       <button (click)="deleteServer(server.id)">Delete</button>
-      <button>Add Site</button>
+      <button (click)="addSiteToServerDialog(server.id)">Add Site</button>
+
+      <!-- Display Sites -->
+      <ul>
+        <li *ngFor="let site of server.sites">
+          {{ site.name }} (Domain: {{ site.domainName }}) - IP:
+          {{ site.ipAddress }}
+          {{ site.active}}
+          <!-- <button (click)="deleteSiteFromServer(server.id, site.id)">
+            Delete Site
+          </button> -->
+        </li>
+      </ul>
     </li>
   </ul>
 </div>

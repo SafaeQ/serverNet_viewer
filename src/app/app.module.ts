@@ -6,10 +6,18 @@ import { ServerListComponent } from './server-list/server-list.component';
 import { ServerDetailsComponent } from './server-details/server-details.component';
 import { FormsModule } from '@angular/forms';
 import { ServerService } from './services/server.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent, ServerListComponent, ServerDetailsComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule
+  ],
   providers: [ServerService],
   bootstrap: [AppComponent],
 })

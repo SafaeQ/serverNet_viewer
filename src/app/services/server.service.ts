@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Server } from '../interfaces/server.modal';
+import { BehaviorSubject, Observable, } from 'rxjs';
+import { Server, Site } from '../interfaces/server.modal';
+import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class ServerService {
   >([]);
   servers$: Observable<Server[]> = this.serversSubject.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private dialog: MatDialog) {
     this.fetchServers();
   }
 
@@ -45,5 +46,18 @@ export class ServerService {
 
   private updateLocalStorage(servers: Server[]): void {
     localStorage.setItem('servers', JSON.stringify(servers));
+  }
+
+  addSiteToServer(serverId: number, newSite: Site): void {
+    const currentServers = this.serversSubject.value;
+    const updatedServers = currentServers.map(server => {
+      if (server.id === serverId) {
+        const updatedSites = [...server.sites, newSite];
+        return { ...server, sites: updatedSites };
+      }
+      return server;
+    });
+    this.serversSubject.next(updatedServers);
+    this.updateLocalStorage(updatedServers);
   }
 }
