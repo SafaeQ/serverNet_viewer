@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Server, ServerService } from '../services/server.service';
+import { ServerService } from '../services/server.service';
+import { Server } from '../interfaces/server.modal';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-server-list',
@@ -7,6 +9,8 @@ import { Server, ServerService } from '../services/server.service';
   styleUrls: ['./server-list.component.css'],
 })
 export class ServerListComponent implements OnInit {
+  servers$: Observable<Server[]> | undefined;
+
   constructor(private serverService: ServerService) {}
 
   servers: Server[] = [];
@@ -14,7 +18,7 @@ export class ServerListComponent implements OnInit {
   newServerIP: string = '';
 
   ngOnInit(): void {
-    this.servers = this.serverService.getServers();
+    this.servers$ = this.serverService.getServers();
   }
 
   addServer() {

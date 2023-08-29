@@ -1,33 +1,26 @@
 import { Injectable } from '@angular/core';
-
-export interface Site {
-  id: number;
-  name: string;
-  domainName: string;
-  ipAddress: string;
-  active: boolean;
-}
-
-export interface Server {
-  id: number;
-  name: string;
-  ipAddress: string;
-  sites: Site[];
-}
+import { Observable, of } from 'rxjs';
+import { Server } from '../interfaces/server.modal';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServerService {
-  constructor() {}
-
   private servers: Server[] = [];
 
-  getServers(): Server[] {
-    return this.servers;
+  getServers(): Observable<Server[]> {
+    const storedData = localStorage.getItem('servers');
+    this.servers = storedData ? JSON.parse(storedData) : [];
+    return of(this.servers);
   }
 
-  addServer(newServer: Server): void {
+  private updateLocalStorage(): void {
+    localStorage.setItem('servers', JSON.stringify(this.servers));
+  }
+
+  addServer(newServer: Server): Observable<void> {
     this.servers.push(newServer);
+    this.updateLocalStorage();
+    return of(undefined);
   }
 }
