@@ -39,9 +39,8 @@ export class ServerListComponent implements OnInit {
     });
 
     this.searchForm = this.formBuilder.group({
-      searchTerm: [''], // Initial value of search term
+      searchTerm: [''],
     });
-
   }
 
   addServer(): void {
@@ -55,7 +54,7 @@ export class ServerListComponent implements OnInit {
 
   addSiteToServerDialog(serverId: number): void {
     const dialogRef = this.dialog.open(ServerDetailsComponent, {
-      data: { serverId }, // Pass the serverId as data to the modal
+      data: { serverId },
     });
     dialogRef.componentInstance.siteAdded.subscribe((newSite: Site) => {
       this.serverService.addSiteToServer(serverId, newSite);
@@ -72,17 +71,24 @@ export class ServerListComponent implements OnInit {
     this.filteredServers = this.servers.filter(
       (server) =>
         server.name.toLowerCase().includes(searchTerm) ||
-        server.ipAddress.includes(searchTerm)
+        server.ipAddress.includes(searchTerm) ||
+        server.sites.filter(
+          (site) =>
+            site.name.toLowerCase().includes(searchTerm) ||
+            site.domainName.toLowerCase().includes(searchTerm) ||
+            site.ipAddress.includes(searchTerm)
+        )
     );
+    // this.filteredSites = this.servers.flatMap((server) =>
+    //   server.sites.filter(
+    //     (site) =>
+    //       site.name.toLowerCase().includes(searchTerm) ||
+    //       site.domainName.toLowerCase().includes(searchTerm) ||
+    //       site.ipAddress.includes(searchTerm)
+    //   )
+    // );
 
-    this.filteredSites = this.servers.flatMap((server) =>
-      server.sites.filter(
-        (site) =>
-          site.name.toLowerCase().includes(searchTerm) ||
-          site.domainName.toLowerCase().includes(searchTerm) ||
-          site.ipAddress.includes(searchTerm)
-      )
-    );
+    console.log('searchTerm', searchTerm);
   }
 
   onSearchTermChange(): void {
