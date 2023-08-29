@@ -35,7 +35,7 @@
 
   <!-- Server List -->
   <ul>
-    <li *ngFor="let server of servers">
+    <li *ngFor="let server of filteredServers">
       <h3>{{ server.name }}</h3>
       <p>IP Address: {{ server.ipAddress }}</p>
       <button (click)="deleteServer(server.id)">Delete</button>

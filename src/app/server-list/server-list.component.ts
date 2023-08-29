@@ -34,11 +34,14 @@ export class ServerListComponent implements OnInit {
   ngOnInit(): void {
     this.serverService.servers$.subscribe((servers) => {
       this.servers = servers;
+      this.filteredServers = this.servers;
+      // this.filteredSites = this.servers.flatMap((server) => server.sites);
     });
 
     this.searchForm = this.formBuilder.group({
       searchTerm: [''], // Initial value of search term
     });
+
   }
 
   addServer(): void {
