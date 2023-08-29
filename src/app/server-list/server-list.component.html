@@ -1,1 +1,36 @@
-<p>server-list works!</p>
+<div>
+  <h2>Server List</h2>
+
+  <!-- Add Server Form -->
+  <form (ngSubmit)="addServer()">
+    <label for="serverName">Server Name:</label>
+    <input
+      type="text"
+      id="serverName"
+      name="serverName"
+      [(ngModel)]="newServerName"
+      required
+    />
+
+    <label for="serverIP">Server IP:</label>
+    <input
+      type="text"
+      id="serverIP"
+      name="serverIP"
+      [(ngModel)]="newServerIP"
+      required
+    />
+
+    <button type="submit">Add Server</button>
+  </form>
+
+  <!-- Server List -->
+  <ul>
+    <li *ngFor="let server of servers">
+      <h3>{{ server.name }}</h3>
+      <p>IP Address: {{ server.ipAddress }}</p>
+      <button>Delete</button>
+      <button>Add Site</button>
+    </li>
+  </ul>
+</div>
