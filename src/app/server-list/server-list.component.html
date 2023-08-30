@@ -1,55 +1,116 @@
 <div>
-  <h2>Server List</h2>
+  <div class="header">
+    <h2>Server List</h2>
+    <form [formGroup]="searchForm">
+      <input
+        class="input-serach"
+        type="text"
+        formControlName="searchTerm"
+        placeholder="Search by IP or Domain"
+        (input)="onSearchTermChange()"
+      />
+    </form>
+  </div>
 
   <!-- Add Server Form -->
-  <form (ngSubmit)="addServer()">
-    <label for="serverName">Server Name:</label>
-    <input
-      type="text"
-      id="serverName"
-      name="serverName"
-      [(ngModel)]="newServer.name"
-      required
-    />
+  <div class="card">
+    <form (ngSubmit)="addServer()" class="form-server">
+      <div class="input-group">
+        <label for="serverName">Server Name:</label>
+        <input
+          type="text"
+          id="serverName"
+          name="serverName"
+          [(ngModel)]="newServer.name"
+          required
+        />
+      </div>
 
-    <label for="serverIP">Server IP:</label>
-    <input
-      type="text"
-      id="serverIP"
-      name="serverIP"
-      [(ngModel)]="newServer.ipAddress"
-      required
-    />
+      <div class="input-group">
+        <label for="serverIP">Server IP:</label>
+        <input
+          type="text"
+          id="serverIP"
+          name="serverIP"
+          [(ngModel)]="newServer.ipAddress"
+          required
+        />
+      </div>
 
-    <button type="submit">Add Server</button>
-  </form>
-
-  <form [formGroup]="searchForm">
-    <input
-      type="text"
-      formControlName="searchTerm"
-      placeholder="Search by IP or Domain"
-      (input)="onSearchTermChange()"
-    />
-  </form>
+      <button type="submit" class="btn-submit">Add Server</button>
+    </form>
+  </div>
 
   <!-- Server List -->
-  <ul>
-    <li *ngFor="let server of filteredServers">
-      <h3>{{ server.name }}</h3>
-      <p>IP Address: {{ server.ipAddress }}</p>
-      <button (click)="deleteServer(server.id)">Delete</button>
-      <button (click)="addSiteToServerDialog(server.id)">Add Site</button>
+  <!-- <div class="content-list">
+    <ul>
+      <li *ngFor="let server of filteredServers">
+        <div class="">
+          <div class="panel-header">
+            <h3>{{ server.name }}</h3>
+            <p>IP Address: {{ server.ipAddress }}</p>
+          </div>
+          <div class="panel-buttons">
+            <button (click)="deleteServer(server.id)">Delete</button>
+            <button (click)="addSiteToServerDialog(server.id)">Add Site</button>
+          </div>
+        </div>
 
-      <!-- Display Sites -->
-      <ul>
-        <li *ngFor="let site of server.sites">
-          {{ site.name }} (Domain: {{ site.domainName }}) - IP:
-          {{ site.ipAddress }}
-          {{ site.active }}
-          <button (click)="deleteSite(server.id, site.id)">Delete Site</button>
-        </li>
-      </ul>
-    </li>
-  </ul>
+       Display Sites -->
+  <!-- <div class="panel-content">
+          <ul>
+            <li *ngFor="let site of server.sites">
+              {{ site.name }} (Domain: {{ site.domainName }}) - IP:
+              {{ site.ipAddress }}
+              {{ site.active }}
+              <button (click)="deleteSite(server.id, site.id)">
+                Delete Site
+              </button>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div> -->
+
+  <div class="content-list">
+    <ul>
+      <li *ngFor="let server of filteredServers">
+        <div class="expansion-panel">
+          <div class="panel-header" (click)="togglePanel(server.id)">
+            <div>
+              <h3>{{ server.name }}</h3>
+              <p>IP Address: {{ server.ipAddress }}</p>
+            </div>
+            <div class="panel-buttons">
+              <mat-icon class="delete-icon" (click)="deleteServer(server.id)"
+                >delete</mat-icon
+              >
+              <mat-icon
+                class="add-icon"
+                (click)="addSiteToServerDialog(server.id)"
+                >add</mat-icon
+              >
+            </div>
+          </div>
+          <div
+            class="panel-content"
+            [ngStyle]="{ display: openPanels[server.id] ? 'block' : 'none' }"
+          >
+            <!-- Display Sites -->
+            <ul>
+              <li *ngFor="let site of server.sites">
+                {{ site.name }} (Domain: {{ site.domainName }}) - IP:
+                {{ site.ipAddress }}
+                {{ site.active }}
+                <button (click)="deleteSite(server.id, site.id)">
+                  Delete Site
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>

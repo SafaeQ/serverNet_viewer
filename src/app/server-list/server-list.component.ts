@@ -86,4 +86,12 @@ export class ServerListComponent implements OnInit {
   onSearchTermChange(): void {
     return this.filterServersAndSites();
   }
+
+  // Inside your component class
+  openPanels: { [serverId: number]: boolean } = {};
+
+  togglePanel(serverId: number): void {
+    this.openPanels[serverId] = !this.openPanels[serverId];
+  }
+
 }
