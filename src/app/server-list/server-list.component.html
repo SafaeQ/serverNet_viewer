@@ -2,6 +2,7 @@
   <!-- Add Server Form -->
   <div class="card">
     <form (ngSubmit)="addServer()" class="form-server">
+      <h2 class="title">Add Server</h2>
       <div class="input-group">
         <label for="serverName">Server Name:</label>
         <input
@@ -50,7 +51,7 @@
       <li *ngFor="let server of filteredServers">
         <div class="expansion-panel">
           <div class="panel-header" (click)="togglePanel(server.id)">
-            <div>
+            <div class="headercell">
               <h3>{{ server.name }}</h3>
               <p>IP Address: {{ server.ipAddress }}</p>
             </div>
