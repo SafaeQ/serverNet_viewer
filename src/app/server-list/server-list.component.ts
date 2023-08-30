@@ -55,6 +55,7 @@ export class ServerListComponent implements OnInit {
   addSiteToServerDialog(serverId: number): void {
     const dialogRef = this.dialog.open(ServerDetailsComponent, {
       data: { serverId },
+      width: '500px',
     });
     dialogRef.componentInstance.siteAdded.subscribe((newSite: Site) => {
       this.serverService.addSiteToServer(serverId, newSite);
@@ -93,5 +94,4 @@ export class ServerListComponent implements OnInit {
   togglePanel(serverId: number): void {
     this.openPanels[serverId] = !this.openPanels[serverId];
   }
-
 }

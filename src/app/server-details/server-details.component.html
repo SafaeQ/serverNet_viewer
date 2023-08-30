@@ -1,8 +1,14 @@
-<div class="modal">
+<!-- <div class="modal">
   <h2>Add Site to Server</h2>
   <form (ngSubmit)="onAddSite()">
     <label for="newSiteName">Site Name:</label>
-    <input type="text" id="newSiteName" name="newSiteName" [(ngModel)]="newSite.name" required />
+    <input
+      type="text"
+      id="newSiteName"
+      name="newSiteName"
+      [(ngModel)]="newSite.name"
+      required
+    />
 
     <label for="domainName">Domain Name:</label>
     <input
@@ -25,4 +31,42 @@
     <button type="submit">Add Site</button>
     <button type="button" (click)="onCancel()">Cancel</button>
   </form>
-</div>
+</div> -->
+
+<div class="modal">
+    <h2 class="modal-title">Add Site to Server</h2>
+    <form (ngSubmit)="onAddSite()">
+      <label for="newSiteName">Site Name:</label>
+      <input
+        type="text"
+        id="newSiteName"
+        name="newSiteName"
+        [(ngModel)]="newSite.name"
+        required
+      />
+  
+      <label for="domainName">Domain Name:</label>
+      <input
+        type="text"
+        id="domainName"
+        name="domainName"
+        [(ngModel)]="newSite.domainName"
+        required
+      />
+  
+      <label for="ipAddress">IP Address:</label>
+      <input
+        type="text"
+        id="ipAddress"
+        name="ipAddress"
+        [(ngModel)]="newSite.ipAddress"
+        required
+      />
+  
+      <div class="modal-buttons">
+        <button type="submit" class="modal-button">Add Site</button>
+        <button type="button" class="modal-button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+  
