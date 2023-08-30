@@ -72,21 +72,13 @@ export class ServerListComponent implements OnInit {
       (server) =>
         server.name.toLowerCase().includes(searchTerm) ||
         server.ipAddress.includes(searchTerm) ||
-        server.sites.filter(
+        server.sites.some(
           (site) =>
             site.name.toLowerCase().includes(searchTerm) ||
             site.domainName.toLowerCase().includes(searchTerm) ||
             site.ipAddress.includes(searchTerm)
         )
     );
-    // this.filteredSites = this.servers.flatMap((server) =>
-    //   server.sites.filter(
-    //     (site) =>
-    //       site.name.toLowerCase().includes(searchTerm) ||
-    //       site.domainName.toLowerCase().includes(searchTerm) ||
-    //       site.ipAddress.includes(searchTerm)
-    //   )
-    // );
 
     console.log('searchTerm', searchTerm);
   }
