@@ -2,7 +2,7 @@
     width: 80%;
     height: 120%;
     border-radius: 0.5rem;
-    background: #f9f7f7;
+    background: #ffffff;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin-left: 110px;
 }
@@ -38,7 +38,6 @@
 #serverIP:focus {
     outline: none;
     border: 1px solid rgb(64, 164, 252);
-    box-shadow: rgba(64, 164, 252) 0px 1px 1px;
 }
 
 #serverName {
@@ -56,7 +55,6 @@
 
 #serverName:focus {
     outline: none;
-    box-shadow: rgba(64, 164, 252) 0px 1px 1px;
     border: 1px solid rgb(64, 164, 252);
 }
 
@@ -74,7 +72,6 @@
 
 .input-serach:focus {
     outline: none;
-    box-shadow: rgba(64, 164, 252) 0px 1px 1px;
     border: 1px solid rgb(64, 164, 252);
 }
 
@@ -111,7 +108,7 @@ label {
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
-    margin-bottom: 4%;
+    margin-top: 4%;
 }
 
 .content-list {
@@ -143,7 +140,7 @@ ul {
     padding: 10px;
     display: none;
     /* Hidden by default */
-    /* background-color: #f0f0f0; */
+    background-color: #ffffff;
 }
 
 .panel-content ul {
@@ -172,7 +169,7 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ffffff;
     padding: 8px 14px;
 }
 
@@ -180,8 +177,7 @@ ul {
     flex: 1;
 }
 
-.active-status {
-    font-weight: bold;
-    color: green;
-    /* or any color you prefer */
+h2 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: x-large;
 }

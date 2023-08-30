@@ -1,17 +1,4 @@
 <div>
-  <div class="header">
-    <h2>Server List</h2>
-    <form [formGroup]="searchForm">
-      <input
-        class="input-serach"
-        type="text"
-        formControlName="searchTerm"
-        placeholder="Search by IP or Domain"
-        (input)="onSearchTermChange()"
-      />
-    </form>
-  </div>
-
   <!-- Add Server Form -->
   <div class="card">
     <form (ngSubmit)="addServer()" class="form-server">
@@ -40,6 +27,19 @@
       </div>
 
       <button type="submit" class="btn-submit">Add Server</button>
+    </form>
+  </div>
+
+  <div class="header">
+    <h2>Server List</h2>
+    <form [formGroup]="searchForm">
+      <input
+        class="input-serach"
+        type="text"
+        formControlName="searchTerm"
+        placeholder="Search by IP or Domain"
+        (input)="onSearchTermChange()"
+      />
     </form>
   </div>
 
