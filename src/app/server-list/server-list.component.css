@@ -160,9 +160,28 @@ ul {
 
 .delete-icon {
     color: red;
+    cursor: pointer;
 }
 
 .add-icon {
     color: rgb(255, 255, 255);
     background-color: #3653F8;
+}
+
+.site-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 8px 14px;
+}
+
+.site-item span {
+    flex: 1;
+}
+
+.active-status {
+    font-weight: bold;
+    color: green;
+    /* or any color you prefer */
 }
