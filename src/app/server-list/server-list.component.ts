@@ -88,10 +88,20 @@ export class ServerListComponent implements OnInit {
     return this.filterServersAndSites();
   }
 
-  // Inside your component class
   openPanels: { [serverId: number]: boolean } = {};
 
   togglePanel(serverId: number): void {
     this.openPanels[serverId] = !this.openPanels[serverId];
+  }
+
+  // Toggle the active status
+  toggleSiteActiveStatus(serverId: number, siteId: number): void {
+    const server = this.servers.find((server) => server.id === serverId);
+    if (server) {
+      const site = server.sites.find((site) => site.id === siteId);
+      if (site) {
+        site.active = !site.active;
+      }
+    }
   }
 }

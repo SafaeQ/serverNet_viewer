@@ -31,7 +31,7 @@
     font-size: 0.9rem;
     padding-inline: 0.5em;
     padding-block: 0.7em;
-    border: none;
+    border: 1px solid #c1c0c0;
     box-shadow: rgba(64, 164, 252, 0.16) 0px 1px 4px;
 }
 
@@ -49,7 +49,7 @@
     font-size: 0.9rem;
     padding-inline: 0.5em;
     padding-block: 0.7em;
-    border: none;
+    border: 1px solid #c1c0c0;
     box-shadow: rgba(64, 164, 252, 0.16) 0px 1px 4px;
 }
 
@@ -129,14 +129,14 @@ ul {
 
 .panel-header {
     padding: 10px;
-    background-color: #FF9800;
+    background-color: #9AC5F4;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 1rem;
     box-shadow: rgba(64, 164, 252, 0.16) 0px 1px 4px;
-    color: #ffffff;
+    color: #000;
 }
 
 .panel-content {
@@ -144,7 +144,8 @@ ul {
     display: none;
     background-color: #ffffff;
     border-radius: 1rem;
-
+    overflow-y: auto;
+    height: 200px;
 }
 
 .headercell {
@@ -188,6 +189,15 @@ ul {
 
 .site-item span {
     flex: 1;
+    padding-left: 4%;
+    width: 445px;
+}
+
+.site-item .items {
+    display: flex;
+    flex-direction: column;
+    padding-left: 4%;
+    margin-top: 2%;
 }
 
 h2 {
@@ -200,4 +210,22 @@ h2 {
     display: flex;
     align-self: center;
     font-size: large;
+}
+
+/* Changing the color of the scrollbar */
+.panel-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.panel-content::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
+
+.panel-content::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+
+.panel-content::-webkit-scrollbar-thumb:hover {
+    background-color: #bab9b9;
 }

@@ -34,7 +34,7 @@ input {
   font-size: 0.9rem;
   padding-inline: 0.5em;
   padding-block: 0.7em;
-  border: none;
+  border: 1px solid #c1c0c0;
   box-shadow: rgba(64, 164, 252, 0.16) 0px 1px 4px;
   margin-bottom: 15px;
 }

@@ -52,8 +52,8 @@
         <div class="expansion-panel">
           <div class="panel-header" (click)="togglePanel(server.id)">
             <div class="headercell">
-              <h3>{{ server.name }}</h3>
-              <p>IP Address: {{ server.ipAddress }}</p>
+              <h3 style="font-weight: 500">{{ server.name }}</h3>
+              <p style="font-weight: 400">IP Address: {{ server.ipAddress }}</p>
             </div>
             <div class="panel-buttons">
               <mat-icon class="delete-icon" (click)="deleteServer(server.id)"
@@ -77,10 +77,20 @@
                 class="site-item"
                 [ngStyle]="{ background: site.active ? '#dbf3db' : '' }"
               >
-                <span
-                  >{{ site.name }} (Domain: {{ site.domainName }}) - IP:
-                  {{ site.ipAddress }}</span
-                >
+                <div>
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="site.active"
+                    (click)="toggleSiteActiveStatus(server.id, site.id)"
+                  />
+                  <span style="font-weight: 500;">{{ site.name }}</span>
+                  <div class="items">
+                    <span>
+                      (Domain: {{ site.domainName }}) - IP:
+                      {{ site.ipAddress }}</span
+                    >
+                  </div>
+                </div>
                 <mat-icon
                   class="delete-icon"
                   (click)="deleteSite(server.id, site.id)"
