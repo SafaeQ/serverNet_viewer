@@ -27,9 +27,13 @@ export class ServerDetailsComponent {
 
   onAddSite(): void {
     const serverId = this.data.serverId;
-    console.log(serverId);
-
-    this.serverService.addSiteToServer(serverId, this.newSite); // Pass the server ID
+    if (
+      this.newSite.domainName &&
+      this.newSite.ipAddress &&
+      this.newSite.name
+    ) {
+      this.serverService.addSiteToServer(serverId, this.newSite); // Pass the server ID
+    }
     this.dialogRef.close();
   }
 

@@ -44,8 +44,10 @@ export class ServerListComponent implements OnInit {
   }
 
   addServer(): void {
-    this.serverService.addServer(this.newServer);
-    this.newServer = { id: 0, name: '', ipAddress: '', sites: [] };
+    if (this.newServer.name && this.newServer.ipAddress) {
+      this.serverService.addServer(this.newServer);
+      this.newServer = { id: 0, name: '', ipAddress: '', sites: [] };
+    }
   }
 
   deleteServer(serverId: number): void {
