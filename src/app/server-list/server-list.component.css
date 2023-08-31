@@ -5,6 +5,11 @@
     background: #ffffff;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin-left: 110px;
+    position: relative;
+    z-index: 3;
+    background-image: url("../../assets/graph.png");
+    background-repeat: no-repeat;
+    background-position: 198% -44%
 }
 
 .form-server {
@@ -212,7 +217,14 @@ h2 {
     font-size: large;
 }
 
-
+img {
+    width: auto;
+    position: absolute;
+    z-index: -1;
+    bottom: -350px;
+    transform: rotate(246deg);
+    left: 284px;
+}
 
 /* Changing the color of the scrollbar */
 .panel-content::-webkit-scrollbar {
