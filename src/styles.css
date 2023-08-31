@@ -8,6 +8,8 @@ html, body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    /* background-image: url("./assets/graph.png");
+    background-repeat: no-repeat; */
 }
 
 
